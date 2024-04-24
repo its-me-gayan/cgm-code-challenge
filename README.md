@@ -6,8 +6,10 @@ A Java command line program that support two options. One to ask a specific ques
 
 ## Tech Stack
 
- Java 21
- 
+ - Java 21
+
+## Notes
+
  - This is how main entry point looks like
  
  ![screenshot](cgm-main-run.png)
