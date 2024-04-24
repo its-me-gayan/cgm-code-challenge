@@ -8,8 +8,10 @@ A Java command line program that support two options. One to ask a specific ques
 
  Java 21
  
- this is how main entry point looks like
+ - This is how main entry point looks like
+ 
  ![screenshot](cgm-main-run.png)
  
- and some insights about unit testing coverage
+ - And some insights about unit testing coverage
+ 
  ![screenshot](cgm-test.png)
