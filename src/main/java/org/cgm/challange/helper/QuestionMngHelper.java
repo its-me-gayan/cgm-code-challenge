@@ -45,7 +45,6 @@ public class QuestionMngHelper {
      * Prints the initial menu to the console.
      */
     public void printInitialMenu() {
-
         System.out.print(OutputMessages.BANNER);
         System.out.print(OutputMessages.TITLE);
 

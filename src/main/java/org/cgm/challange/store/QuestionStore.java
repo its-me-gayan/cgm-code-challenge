@@ -10,39 +10,51 @@ import java.util.stream.Stream;
  * Time: 1:58 PM
  */
 public class QuestionStore {
+    // Static map to store questions and their corresponding answers
     private static final Map<String, String[]> questionStoreMap = new HashMap<>();
-   private static QuestionStore questionStore;
+    // Singleton instance of QuestionStore
+    private static QuestionStore questionStore;
+
+    // Private constructor to enforce Singleton pattern
     private QuestionStore() {
     }
 
+    // Singleton getInstance method to get an instance of QuestionStore
     public static QuestionStore getInstance(){
-        return Objects.isNull(questionStore) ? new QuestionStore():questionStore;
+        return Objects.isNull(questionStore) ? new QuestionStore() : questionStore;
     }
 
+    // Merge method to merge new answers with existing ones for a given question
     public void merge(String key, String[] value){
-
-        String[] finalAnswerList = Stream
-                .concat(
+        // Concatenate new answers with existing ones, remove duplicates, and sort
+        String[] finalAnswerList = Stream.concat(
                         Arrays.stream(value),
                         Arrays.stream(questionStoreMap.getOrDefault(key, new String[]{}))
                 )
-                .map(s -> s.trim().toLowerCase())
+                .map(String::trim)
+                .map(String::toLowerCase)
                 .distinct()
                 .sorted()
                 .toArray(String[]::new);
-        Arrays.stream(finalAnswerList).forEach(s -> System.out.println(s));
-        questionStoreMap.put(key , finalAnswerList);
 
+        // Print each answer in the merged list
+        Arrays.stream(finalAnswerList).forEach(System.out::println);
+        // Update the map with the merged answer list
+        questionStoreMap.put(key , finalAnswerList);
     }
-    public  void replaceOrSave(String key, String[] value){
+
+    // Method to replace existing answers or save new ones for a given question
+    public void replaceOrSave(String key, String[] value){
         questionStoreMap.put(key , value);
     }
 
-    public  String[] findAllAnswerByQuestion(String key){
-       return questionStoreMap.getOrDefault(key,new String[]{});
+    // Method to find all answers for a given question
+    public String[] findAllAnswerByQuestion(String key){
+        return questionStoreMap.getOrDefault(key, new String[]{});
     }
+
+    // Method to print all questions and their corresponding answers
     public void printAll(){
         questionStoreMap.forEach((s, strings) -> System.out.println(s +" - " + Arrays.toString(strings)));
     }
-
 }
