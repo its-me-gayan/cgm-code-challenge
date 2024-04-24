@@ -65,7 +65,6 @@ public class MainRunner {
     public static String addQuestion(Scanner scanner){
         out.println(OutputMessages.ENTER_QUESTION_AND_ANSWER);
         String input = scanner.nextLine();
-        out.println(input);
         return QuestionMngService.getInstance().addQuestion(input, scanner);
     }
 
