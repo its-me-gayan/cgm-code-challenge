@@ -12,4 +12,4 @@ A Java command line program that support two options. One to ask a specific ques
  ![screenshot](cgm-main-run.png)
  
  and some insights about unit testing coverage
- ![screenshot](cgm-test.jpg)
+ ![screenshot](cgm-test.png)
