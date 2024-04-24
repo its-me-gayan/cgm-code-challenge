@@ -19,6 +19,10 @@ import java.util.regex.Pattern;
 @DisplayName("Ask Question functionality testing")
 class AskQuestionTest {
 
+    /**
+     * Test case for successfully asking a question and receiving answers.
+     * @throws IOException if an I/O error occurs.
+     */
     @Test
     void askQuestion_Success() throws IOException {
 
@@ -48,6 +52,10 @@ class AskQuestionTest {
         Assertions.assertArrayEquals(answerArray , strings);
     }
 
+    /**
+     * Test case for failing to match the question with any specific answer, returning a universal answer.
+     * @throws IOException if an I/O error occurs.
+     */
     @Test
     void askQuestion_Failed_No_Matching_Answer_Universal_Answer() throws IOException {
         String questionString = "What are you doing?"; //question
@@ -64,6 +72,10 @@ class AskQuestionTest {
         Assertions.assertArrayEquals(answerList , new String[]{expectedAnswer});
     }
 
+    /**
+     * Test case for failing due to an invalid question format.
+     * @throws IOException if an I/O error occurs.
+     */
     @Test
     void askQuestion_Failed_Invalid_Format() throws IOException {
         String questionString = "What are you doing "; //without question mark
@@ -80,6 +92,10 @@ class AskQuestionTest {
         Assertions.assertArrayEquals(answerList , new String[]{expectedAnswer});
     }
 
+    /**
+     * Helper method to set user input for testing.
+     * @param userInput the user input string to be simulated.
+     */
     private void setInput(String userInput) {
         System.setIn(new ByteArrayInputStream(userInput.getBytes()));
     }

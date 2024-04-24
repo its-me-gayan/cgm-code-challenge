@@ -18,6 +18,9 @@ import java.util.Scanner;
 @DisplayName("Add Question functionality testing")
 class AddQuestionTest {
 
+    /**
+     * Test case for successful addition of a question and its answers.
+     */
     @Test
     void addQuestion_Success() {
         String inputQuestion = "What is Peters favorite food? \"Pizza\" \"Spaghetti\" \"Ice cream\"";
@@ -32,7 +35,9 @@ class AddQuestionTest {
         String outputString = MainRunner.addQuestion(new Scanner(System.in));
         Assertions.assertEquals(outputString,expectedOutput);
     }
-
+    /**
+     * Test case for addition of a question with invalid format.
+     */
     @Test
     void addQuestion_Failed_Invalid_Format() {
         //no question mark
@@ -49,6 +54,9 @@ class AddQuestionTest {
         Assertions.assertEquals(outputString,expectedOutput);
     }
 
+    /**
+     * Test case for addition of a question where the question length exceeds the maximum allowed.
+     */
     @Test
     void addQuestion_Failed_Question_Length_Exceeded() {
         //no question mark
@@ -66,6 +74,9 @@ class AddQuestionTest {
         Assertions.assertEquals(outputString,expectedOutput);
     }
 
+    /**
+     * Test case for addition of a question where the length of one or more answers exceeds the maximum allowed.
+     */
     @Test
     void addQuestion_Failed_Answer_Length_Exceeded() {
         //no question mark
@@ -82,6 +93,9 @@ class AddQuestionTest {
         Assertions.assertEquals(outputString,expectedOutput);
     }
 
+    /**
+     * Test case for addition of a question without any answers.
+     */
     @Test
     void addQuestion_Failed_Should_Have_AtLeast_OneQuestion() {
         //no question mark
@@ -96,6 +110,10 @@ class AddQuestionTest {
         String outputString = MainRunner.addQuestion(new Scanner(System.in));
         Assertions.assertEquals(outputString,expectedOutput);
     }
+
+    /**
+     * Test case for successfully adding a question and replacing existing answers when the question already exists.
+     */
     @Test
     void addQuestion_Success_Question_Already_Exists_And_Replaced() {
         String expectedOutput = "Question and answers added (replaced) successfully.";
@@ -126,6 +144,10 @@ class AddQuestionTest {
         Assertions.assertEquals(outputString,expectedOutput);
         Assertions.assertArrayEquals(new String[]{"not doing well", "going bad"} , answerList);
     }
+
+    /**
+     * Test case for successfully adding a question and merging new answers with existing ones when the question already exists.
+     */
     @Test
     void addQuestion_Success_Question_Already_Exists_And_Merged() {
         String expectedOutput = "Question and answers added (merged) successfully.";
@@ -160,6 +182,9 @@ class AddQuestionTest {
         Assertions.assertArrayEquals(array,answerList);
     }
 
+    /**
+     * Test case for successfully discarding new answers when adding a question that already exists.
+     */
     @Test
     void addQuestion_Success_Question_Already_Exists_And_Discard() {
         String expectedOutput = "Exiting...";
