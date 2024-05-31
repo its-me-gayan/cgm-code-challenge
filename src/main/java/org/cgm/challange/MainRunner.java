@@ -2,14 +2,15 @@ package org.cgm.challange;
 
 
 import org.cgm.challange.helper.QuestionMngHelper;
+import org.cgm.challange.helper.impl.QuestionMngHelperImpl;
 import org.cgm.challange.service.QuestionMngService;
+import org.cgm.challange.service.impl.QuestionMngServiceImpl;
 import org.cgm.challange.util.Constant;
 import org.cgm.challange.util.OutputMessages;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
-import static java.lang.System.in;
 import static java.lang.System.out;
 
 
@@ -20,20 +21,28 @@ import static java.lang.System.out;
  * Time: 10:02 AM
  */
 public class MainRunner {
+
+    private QuestionMngService questionMngService;
+    private QuestionMngHelper questionMngHelper;
+
+    public MainRunner() {
+        this.questionMngService = new QuestionMngServiceImpl();
+        this.questionMngHelper = new QuestionMngHelperImpl();
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         //starting the process
-        startProcess(scanner);
+        new MainRunner().startProcess(scanner);
     }
 
     /**
      * Starts the process of handling user input.
      */
-    public static void startProcess(Scanner scanner) {
+    public void startProcess(Scanner scanner) {
 
         // Continuous loop to keep the program running until the user chooses to exit
-        QuestionMngHelper questionMngHelper = QuestionMngHelper.getInstance();
         questionMngHelper.printInitialMenu();
         while (true) {
             System.out.println(OutputMessages.INITAL_MENU_OPTION_STRING);
@@ -55,17 +64,17 @@ public class MainRunner {
         }
     }
 
-    public static String[] askQuestion(Scanner scanner){
+    public String[] askQuestion(Scanner scanner){
         out.println(OutputMessages.ENTER_QUESTION);
         String inputQuestion = scanner.nextLine();
         out.println(OutputMessages.ANSWER);
-        return QuestionMngService.getInstance().askQuestion(inputQuestion);
+        return questionMngService.askQuestion(inputQuestion);
     }
 
-    public static String addQuestion(Scanner scanner){
+    public String addQuestion(Scanner scanner){
         out.println(OutputMessages.ENTER_QUESTION_AND_ANSWER);
         String input = scanner.nextLine();
-        return QuestionMngService.getInstance().addQuestion(input, scanner);
+        return questionMngService.addQuestion(input, scanner);
     }
 
 }

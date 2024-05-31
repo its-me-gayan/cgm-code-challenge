@@ -18,6 +18,13 @@ import java.util.Scanner;
 @DisplayName("Add Question functionality testing")
 class AddQuestionTest {
 
+    private static MainRunner mainRunner;
+
+    @BeforeAll
+    public static void init(){
+        mainRunner = new MainRunner();
+    }
+
     /**
      * Test case for successful addition of a question and its answers.
      */
@@ -32,7 +39,7 @@ class AddQuestionTest {
                 System.lineSeparator()
         );
         System.setIn(new ByteArrayInputStream(userInput.getBytes()));
-        String outputString = MainRunner.addQuestion(new Scanner(System.in));
+        String outputString = mainRunner.addQuestion(new Scanner(System.in));
         Assertions.assertEquals(outputString,expectedOutput);
     }
     /**
@@ -50,7 +57,7 @@ class AddQuestionTest {
                 System.lineSeparator()
         );
         System.setIn(new ByteArrayInputStream(userInput.getBytes()));
-        String outputString = MainRunner.addQuestion(new Scanner(System.in));
+        String outputString = mainRunner.addQuestion(new Scanner(System.in));
         Assertions.assertEquals(outputString,expectedOutput);
     }
 
@@ -70,7 +77,7 @@ class AddQuestionTest {
                 System.lineSeparator()
         );
         System.setIn(new ByteArrayInputStream(userInput.getBytes()));
-        String outputString = MainRunner.addQuestion(new Scanner(System.in));
+        String outputString = mainRunner.addQuestion(new Scanner(System.in));
         Assertions.assertEquals(outputString,expectedOutput);
     }
 
@@ -89,7 +96,7 @@ class AddQuestionTest {
                 System.lineSeparator()
         );
         System.setIn(new ByteArrayInputStream(userInput.getBytes()));
-        String outputString = MainRunner.addQuestion(new Scanner(System.in));
+        String outputString = mainRunner.addQuestion(new Scanner(System.in));
         Assertions.assertEquals(outputString,expectedOutput);
     }
 
@@ -107,7 +114,7 @@ class AddQuestionTest {
                 System.lineSeparator()
         );
         System.setIn(new ByteArrayInputStream(userInput.getBytes()));
-        String outputString = MainRunner.addQuestion(new Scanner(System.in));
+        String outputString = mainRunner.addQuestion(new Scanner(System.in));
         Assertions.assertEquals(outputString,expectedOutput);
     }
 
@@ -127,7 +134,7 @@ class AddQuestionTest {
         System.setIn(new ByteArrayInputStream(userInput.getBytes()));
         Scanner scanner = new Scanner(System.in);
 
-        MainRunner.addQuestion(scanner);
+        mainRunner.addQuestion(scanner);
 
         String inputQuestion2 = "How are your? \"not doing well\" \"going bad\"";
 
@@ -136,10 +143,10 @@ class AddQuestionTest {
                 System.lineSeparator()
         );
         System.setIn(new ByteArrayInputStream(userInput2.getBytes()));
-        String outputString = MainRunner.addQuestion(new Scanner(System.in));
+        String outputString = mainRunner.addQuestion(new Scanner(System.in));
 
         System.setIn(new ByteArrayInputStream("How are your?".getBytes()));
-        String[] answerList = MainRunner.askQuestion(new Scanner(System.in));
+        String[] answerList = mainRunner.askQuestion(new Scanner(System.in));
 
         Assertions.assertEquals(outputString,expectedOutput);
         Assertions.assertArrayEquals(new String[]{"not doing well", "going bad"} , answerList);
@@ -161,7 +168,7 @@ class AddQuestionTest {
         System.setIn(new ByteArrayInputStream(userInput.getBytes()));
         Scanner scanner = new Scanner(System.in);
 
-        MainRunner.addQuestion(scanner);
+        mainRunner.addQuestion(scanner);
 
         String inputQuestion2 = "What is your name? \"testname1\" \"testname2\"";
 
@@ -170,11 +177,11 @@ class AddQuestionTest {
                 System.lineSeparator()
         );
         System.setIn(new ByteArrayInputStream(userInput2.getBytes()));
-        String outputString = MainRunner.addQuestion(new Scanner(System.in));
+        String outputString = mainRunner.addQuestion(new Scanner(System.in));
 
         System.setIn(new ByteArrayInputStream("What is your name?".getBytes()));
 
-        String[] answerList = MainRunner.askQuestion(new Scanner(System.in));
+        String[] answerList = mainRunner.askQuestion(new Scanner(System.in));
         String[] finalAnswer = {"Gayan", "Sanjeewa", "testname1", "testname2"};
         String[] array = Arrays.stream(finalAnswer).map(String::toLowerCase).toArray(String[]::new);
 
@@ -198,7 +205,7 @@ class AddQuestionTest {
         System.setIn(new ByteArrayInputStream(userInput.getBytes()));
         Scanner scanner = new Scanner(System.in);
 
-        MainRunner.addQuestion(scanner);
+        mainRunner.addQuestion(scanner);
 
         String inputQuestion2 = "Tell me Something? \"watch some movies\" \"go on a trip\"";
 
@@ -208,17 +215,18 @@ class AddQuestionTest {
                 System.lineSeparator()
         );
         System.setIn(new ByteArrayInputStream(userInput2.getBytes()));
-        String outputString = MainRunner.addQuestion(new Scanner(System.in));
+        String outputString = mainRunner.addQuestion(new Scanner(System.in));
 
         System.setIn(new ByteArrayInputStream("Tell me Something?".getBytes()));
 
-        String[] answerList = MainRunner.askQuestion(new Scanner(System.in));
+        String[] answerList = mainRunner.askQuestion(new Scanner(System.in));
         String[] finalAnswer = {"Hi", "How are you"};
         String[] array = Arrays.stream(finalAnswer).toArray(String[]::new);
 
         Assertions.assertEquals(outputString,expectedOutput);
         Assertions.assertArrayEquals(array,answerList);
     }
+
     private String getAnswerWith256Characters() {
         return getRandomString();
     }

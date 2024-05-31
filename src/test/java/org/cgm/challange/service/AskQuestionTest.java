@@ -2,6 +2,7 @@ package org.cgm.challange.service;
 
 import org.cgm.challange.MainRunner;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +19,12 @@ import java.util.regex.Pattern;
  */
 @DisplayName("Ask Question functionality testing")
 class AskQuestionTest {
+    private static MainRunner mainRunner;
 
+    @BeforeAll
+    public static void init(){
+        mainRunner = new MainRunner();
+    }
     /**
      * Test case for successfully asking a question and receiving answers.
      * @throws IOException if an I/O error occurs.
@@ -38,14 +44,14 @@ class AskQuestionTest {
                 System.lineSeparator()
         );
         setInput(userInput);
-        String outputString = MainRunner.addQuestion(new Scanner(System.in));
+        String outputString = mainRunner.addQuestion(new Scanner(System.in));
         String questionString = "You wanna go somewhere?"; //question
 
         String userInput2 = String.format(questionString+"%s",
                 System.lineSeparator()
         );
         setInput(userInput2);
-        String[] strings = MainRunner.askQuestion(new Scanner(System.in));
+        String[] strings = mainRunner.askQuestion(new Scanner(System.in));
 
         Assertions.assertEquals(outputString , expectedOutput);
         Assertions.assertEquals(answerArray.length , strings.length);
@@ -66,7 +72,7 @@ class AskQuestionTest {
                 System.lineSeparator()
         );
         setInput(userInput);
-        String[] answerList = MainRunner.askQuestion(new Scanner(System.in));
+        String[] answerList = mainRunner.askQuestion(new Scanner(System.in));
 
         Assertions.assertEquals(1 , answerList.length);
         Assertions.assertArrayEquals(answerList , new String[]{expectedAnswer});
@@ -86,7 +92,7 @@ class AskQuestionTest {
                 System.lineSeparator()
         );
         setInput(userInput);
-        String[] answerList = MainRunner.askQuestion(new Scanner(System.in));
+        String[] answerList = mainRunner.askQuestion(new Scanner(System.in));
 
         Assertions.assertEquals(1 , answerList.length);
         Assertions.assertArrayEquals(answerList , new String[]{expectedAnswer});
